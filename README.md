@@ -31,3 +31,15 @@ A Java 21 and Maven project implementing a prior authorization lifecycle.
 
 ## Test baseline
 The recorded baseline is 151 passing tests. Run the command above to verify.
+
+## Worked SLA example
+
+Consider a standard-priority MRI authorization with a 14-day SLA. The timer counts business time only, excluding weekends and configured holidays.
+
+1. The request accumulates 3 active business days of review time.
+2. The workflow requests additional information, pausing the SLA timer.
+3. The requested documents arrive 4 calendar days later. The wait does not count toward active review time.
+4. Review resumes with 3 active days already used.
+5. Escalation is due when active review time reaches 80% of the 14-day allowance: 14 × 0.80 = 11.2 active days. After resumption, another 8.2 active days are needed to reach that threshold.
+
+The actual escalation date depends on the business calendar, configured holidays, and review timestamps. The timer must be checked against accumulated active time, not calendar time alone.
