@@ -1,0 +1,11 @@
+﻿target/
+.idea/
+*.iml
+.env
+.env.*
+!.env.example
+*.log
+
+# Local recovery backups
+*.bak
+workflow-recovery.zip
